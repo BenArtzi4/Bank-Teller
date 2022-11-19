@@ -1,4 +1,4 @@
-public class BankAccount
+public class BankAccount extends Thread
 {
     private final int accountNumber;
     private double balance;
@@ -7,6 +7,11 @@ public class BankAccount
     {
         this.accountNumber = account;
         this.balance = amount;
+    }
+
+    public void run()
+    {
+        super.run();
     }
 
     public double getBalance()
