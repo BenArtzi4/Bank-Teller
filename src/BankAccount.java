@@ -9,7 +9,7 @@ public class BankAccount
         this.balance = amount;
     }
 
-    public int getAccountNumber() {
+    public synchronized int getAccountNumber() {
         return accountNumber;
     }
 
@@ -41,9 +41,8 @@ public class BankAccount
     }
 
     @Override
-    public String toString()
+    public synchronized String toString()
     {
-        return "Account number: " + this.accountNumber +
-                "\nBalance: " + this .balance;
+        return String.format("Account number: " +"%d"  + "\nBalance: " + "%.2f" ,this.accountNumber,this .balance);
     }
 }
