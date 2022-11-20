@@ -18,4 +18,10 @@ public class Transaction
     {
         return this.amount;
     }
+
+    @Override
+    public String toString()
+    {
+        return String.format("Account number: " +"%d"  + "\nAmount: " + "%.2f" ,this.account.getAccountNumber(),this.amount);
+    }
 }
