@@ -18,10 +18,15 @@ public class TransactionsArray
         {
             return null;
         }
-        int tempAccountNumber = transactions.get(FIRST).getAccountNumber();
+        BankAccount tempAccountNumber = transactions.get(FIRST).getAccount();
         double tempAmount = transactions.get(FIRST).getAmount();
         Transaction tempTransaction = new Transaction(tempAccountNumber, tempAmount);
         transactions.remove(FIRST);
         return tempTransaction;
+    }
+
+    public void addTransaction(Transaction transaction)
+    {
+        this.transactions.add(transaction);
     }
 }
