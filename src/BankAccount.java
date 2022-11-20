@@ -2,7 +2,6 @@ public class BankAccount
 {
     private final int accountNumber;
     private double balance;
-    private final static int ZERO = 0;
 
     public BankAccount(int account, double amount)
     {
@@ -10,21 +9,32 @@ public class BankAccount
         this.balance = amount;
     }
 
-    public double getBalance()
+    public synchronized double getBalance()
     {
         return balance;
     }
 
-    public void transaction(double amount)
+    /*
+    This function returns:
+    0 - if the balance after adding or subtracting is positive
+    1 - if negative
+     */
+    public synchronized boolean trySetBalance(double amount)
     {
-        // TODO: maybe using while the account is negative
-        if (amount > ZERO || this.balance - amount >= ZERO )
-        {
-            this.balance += amount;
-        }
-        else
-        {
+        final int EMPTY = 0;
 
+        if (this.balance + amount < EMPTY)
+        {
+            return false;
         }
+        setBalance(amount);
+        return true;
     }
+
+    public void setBalance(double amount)
+    {
+        this.balance += amount;
+    }
+
+
 }
