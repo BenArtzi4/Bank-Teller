@@ -9,6 +9,10 @@ public class BankAccount
         this.balance = amount;
     }
 
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
     public synchronized double getBalance()
     {
         return balance;
@@ -31,7 +35,7 @@ public class BankAccount
         return true;
     }
 
-    public void setBalance(double amount)
+    private void setBalance(double amount)
     {
         this.balance += amount;
     }
