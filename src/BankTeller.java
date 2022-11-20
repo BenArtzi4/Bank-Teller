@@ -1,8 +1,8 @@
-import java.util.ArrayList;
+import java.util.Random;
 
 public class BankTeller extends Thread
 {
-    private TransactionsArray transactions;
+    private final TransactionsArray transactions;
 
     public BankTeller(TransactionsArray transactions)
     {
@@ -23,30 +23,50 @@ public class BankTeller extends Thread
          */
             if(!(currentBankAccount.trySetBalance(currentTransaction.getAmount())))
             {
-                System.out.printf(
-                        "\nTransaction was rejected due to an attempt to enter a negative balance\n" +
-                        "Bank account: " + "%d" +
-                        "\n Current balance: " + "%.2f" +
-                        "\nTransaction amount: " + "%.2f" +
-                        "\nBalance if the action was executed: " + "%.2f",
-                        currentBankAccount.getAccountNumber(), currentBankAccount.getBalance(),
-                        currentTransaction.getAmount(), (currentBankAccount.getBalance() +currentTransaction.getAmount())
-
-                );
+                printRejectedTransaction(currentBankAccount, currentTransaction);
                 transactions.addTransaction(currentTransaction);
             }
             else
             {
-                System.out.printf(
-                        "\nTransaction completed successfully\n" +
-                        "Bank account: " + "%d" +
-                        "\n Balance before Transaction: " + "%.2f" +
-                        "\n Balance after Transaction: " + "%.2f" +
-                        "\nTransaction amount: " + "%.2f",
-                        currentBankAccount.getAccountNumber(), (currentBankAccount.getBalance() - currentTransaction.getAmount()),
-                        currentBankAccount.getBalance(), currentTransaction.getAmount()
-                );
+                printSuccessTransaction(currentBankAccount, currentTransaction);
+            }
+            try {
+                sleep(randomSleepTime());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
+    }
+
+    private void printSuccessTransaction(BankAccount currentBankAccount, Transaction currentTransaction)
+    {
+        System.out.printf(
+                "\n\nTransaction completed successfully\n" +
+                        "Bank account: " + "%d" +
+                        "\nBalance before Transaction: " + "%.2f" +
+                        "\nBalance after Transaction: " + "%.2f" +
+                        "\nTransaction amount: " + "%.2f",
+                currentBankAccount.getAccountNumber(), (currentBankAccount.getBalance() - currentTransaction.getAmount()),
+                currentBankAccount.getBalance(), currentTransaction.getAmount()
+        );
+    }
+
+    private void printRejectedTransaction(BankAccount currentBankAccount, Transaction currentTransaction)
+    {
+        System.out.printf(
+                "\n\nTransaction was rejected due to an attempt to enter a negative balance\n" +
+                        "Bank account: " + "%d" +
+                        "\nCurrent balance: " + "%.2f" +
+                        "\nTransaction amount: " + "%.2f" +
+                        "\nBalance if the action was executed: " + "%.2f",
+                currentBankAccount.getAccountNumber(), currentBankAccount.getBalance(),
+                currentTransaction.getAmount(), (currentBankAccount.getBalance() +currentTransaction.getAmount())
+        );
+    }
+
+    private int randomSleepTime()
+    {
+        Random rand = new Random();
+        return rand.nextInt(100);
     }
 }
