@@ -40,5 +40,10 @@ public class BankAccount
         this.balance += amount;
     }
 
-
+    @Override
+    public String toString()
+    {
+        return "Account number: " + this.accountNumber +
+                "\nBalance: " + this .balance;
+    }
 }
