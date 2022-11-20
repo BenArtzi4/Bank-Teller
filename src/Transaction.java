@@ -1,19 +1,21 @@
 public class Transaction
 {
-    private final int accountNumber;
+    private BankAccount account;
     private double amount;
 
-    public Transaction(int account, double amount)
+    public Transaction(BankAccount account, double amount)
     {
-        this.accountNumber = account;
+        this.account = account;
         this.amount = amount;
     }
 
-    public int getAccountNumber() {
-        return accountNumber;
+    public BankAccount getAccount()
+    {
+        return this.account;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getAmount()
+    {
+        return this.amount;
     }
 }
