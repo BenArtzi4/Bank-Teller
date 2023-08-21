@@ -1,11 +1,19 @@
-# Bank Teller
+# Bank Account Management System
 
-### Welcome to the Bank Teller program, written in Java!
+This repository contains a Java project that simulates a simple bank account management system. This project was developed as part of a computer science course. It includes classes for managing bank accounts, transactions, and bank tellers. The simulation demonstrates concurrent transactions being processed by multiple bank tellers.
 
-This program represents a bank teller system that updates bank accounts and maintains a database of transactions and teller information. Each bank teller is represented by a separate thread to ensure that transactions are not processed twice.
+## Classes
 
-The program has the following features:
+### BankAccount
 
-Account updating: The bank tellers can update the accounts of customers by adding or withdrawing funds as needed.
+The `BankAccount` class represents a bank account with an account number and balance. It includes methods for retrieving the account number, balance, and modifying the balance through thread-safe operations.
 
-Transaction database: The program maintains a database of all transactions made by the bank tellers. This includes information such as the account number, the transaction amount, and the date and time of the transaction.
+### BankTeller
+
+The `BankTeller` class simulates a bank teller that processes transactions concurrently. It takes transactions from a shared queue and updates the associated bank account balances accordingly.
+
+## Getting Started
+
+1. Clone this repository to your local machine.
+2. Compile the Java classes using your preferred Java compiler or development environment.
+3. Run the `Main` class to start the simulation.
